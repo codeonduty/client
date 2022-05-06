@@ -2,7 +2,7 @@
 
 // Libraries:
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Row,
   Col,
@@ -12,8 +12,7 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // Modules:
 
@@ -23,20 +22,9 @@ import Message from '../../component/Message/Message';
 
 // Item page component
 const Item = () => {
-  // STATE ------------------------------------------------------------------ /
-
-  const [quantity, setQuantity] = useState(1);
-  const { loading, error, details } = useSelector((store) => {
+  const { error, details } = useSelector((store) => {
     return store.item;
   });
-
-  // ------------------------------------------------------------------------ /
-
-  // Instantiate parameter parser
-  let params = useParams();
-
-  // Instantiate dispatch handler
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -51,7 +39,6 @@ const Item = () => {
               alt={details.name}
               fluid
             />
-
             <Card>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
@@ -60,31 +47,6 @@ const Item = () => {
                     <Col>{details.stock}</Col>
                   </Row>
                 </ListGroup.Item>
-                {details.stock !== 0 ? (
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Quantity</Col>
-                      <Col>
-                        <Form.Control
-                          as='select'
-                          value={quantity}
-                          onChange={(event) => {
-                            setQuantity(event.target.value);
-                          }}
-                        >
-                          {[...Array(details.stock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))}
-                        </Form.Control>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                ) : (
-                  ''
-                )}
-
                 <Button
                   className='px-5'
                   variant='primary'

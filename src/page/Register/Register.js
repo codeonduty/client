@@ -4,12 +4,13 @@
 
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Modules:
 
-import Message from '../../component/Message/Message';
+import Message from './../../component/Message/Message';
+import register from './../../store/slice/shopper/register';
 
 // Code:
 
@@ -24,6 +25,12 @@ const Register = () => {
     return store.shopper;
   });
 
+  // Instantiate dispatch handler
+  const dispatch = useDispatch();
+
+  // Instantiate navigation handler
+  let navigate = useNavigate();
+
   return (
     <>
       <Container>
@@ -32,8 +39,7 @@ const Register = () => {
           {error && <Message variant='danger'>{error}</Message>}
           {loading && <h2>Loading...</h2>}
           <Form onSubmit={() => {}}>
-            <Form.Group controlId='username'>
-              <Form.Label>Username</Form.Label>
+            <Form.Group controlId='username' className='my-3'>
               <Form.Control
                 type='text'
                 placeholder='Username'
@@ -43,8 +49,7 @@ const Register = () => {
                 }}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='email'>
-              <Form.Label>Email</Form.Label>
+            <Form.Group controlId='email' className='my-3'>
               <Form.Control
                 type='email'
                 placeholder='Email'
@@ -54,8 +59,7 @@ const Register = () => {
                 }}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='password'>
-              <Form.Label>Password</Form.Label>
+            <Form.Group controlId='password' className='my-3'>
               <Form.Control
                 type='password'
                 placeholder='Password'
@@ -65,7 +69,20 @@ const Register = () => {
                 }}
               ></Form.Control>
             </Form.Group>
-            <Button className='my-3' type='submit' variant='primary'>
+            <Button
+              className='my-3'
+              type='submit'
+              variant='primary'
+              onClick={(event) => {
+                event.preventDefault();
+
+                const form = { username, email, password };
+
+                if (username && email && password) {
+                  dispatch(register({ form, navigate }));
+                }
+              }}
+            >
               REGISTER
             </Button>
           </Form>

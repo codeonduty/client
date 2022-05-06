@@ -6,11 +6,11 @@ import { configureStore } from '@reduxjs/toolkit';
 
 // Modules:
 
-import catalogueReducer from './slice/catalogue';
-import itemReducer from './slice/item';
-import shopperReducer from './slice/shopper';
-import shoppingListReducer from './slice/list/shoppingList';
-import wishListReducer from './slice/list/wishList';
+import catalogueReducer from './slice/catalogue/catalogue';
+import itemReducer from './slice/item/item';
+import shopperReducer from './slice/shopper/shopper';
+import shoppingListReducer from './slice/list/shopping/shoppingList';
+import wishListReducer from './slice/list/wish/wishList';
 
 // Code:
 

@@ -4,12 +4,13 @@
 
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Modules:
 
 import Message from './../../component/Message/Message';
+import login from '../../store/slice/shopper/login';
 
 // Code:
 
@@ -19,7 +20,13 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { loading, error } = useSelector((store) => {
+  // Instantiate dispatch handler
+  const dispatch = useDispatch();
+
+  // Instantiate navigation handler
+  let navigate = useNavigate();
+
+  const { error } = useSelector((store) => {
     return store.shopper;
   });
 
@@ -29,11 +36,10 @@ const Login = () => {
         <Row className='justify-content-md-center'>
           <h1>LOGIN</h1>
           {error && <Message variant='danger'>{error}</Message>}
-          {loading && <h2>Loading...</h2>}
           <Form onSubmit={() => {}}>
             <Form.Group controlId='username'>
-              <Form.Label>Username</Form.Label>
               <Form.Control
+                className='my-3'
                 type='text'
                 placeholder='Username'
                 value={username}
@@ -43,8 +49,8 @@ const Login = () => {
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='password'>
-              <Form.Label>Password</Form.Label>
               <Form.Control
+                className='my-3'
                 type='password'
                 placeholder='Password'
                 value={password}
@@ -53,7 +59,20 @@ const Login = () => {
                 }}
               ></Form.Control>
             </Form.Group>
-            <Button className='my-3' type='submit' variant='primary'>
+            <Button
+              className='my-3'
+              type='submit'
+              variant='primary'
+              onClick={(event) => {
+                event.preventDefault();
+
+                const form = { username, password };
+
+                if (username && password) {
+                  dispatch(login({ form, navigate }));
+                }
+              }}
+            >
               LOGIN
             </Button>
           </Form>

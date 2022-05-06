@@ -6,7 +6,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Modules:
 
-import items from './../../items';
+import items from './../../../items';
 
 // Code:
 
