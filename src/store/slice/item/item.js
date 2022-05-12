@@ -16,11 +16,18 @@ const initialState = {
   details: {},
 };
 
-const shoppingListSlice = createSlice({
+const itemSlice = createSlice({
   name: 'shopping list',
   initialState,
+  reducers: {
+    populate: (state, action) => {
+      state.details = action.payload;
+    },
+  },
 });
 
-export default shoppingListSlice.reducer;
+export const { populate } = itemSlice.actions;
+
+export default itemSlice.reducer;
 
 // item.js ends here

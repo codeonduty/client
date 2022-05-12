@@ -12,9 +12,6 @@ import { Row, Col } from 'react-bootstrap';
 import ItemThumbail from '../../component/Thumbnail/Item/ItemThumbnail';
 import Message from '../../component/Message/Message';
 
-// Actions
-//import fetchCatalogue from '../../action/catalogue/fetchCatalogue';
-
 // Code:
 
 // Catalogue page component

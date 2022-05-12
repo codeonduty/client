@@ -4,7 +4,9 @@
 
 import React from 'react';
 import { Card, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { populate } from '../../../store/slice/item/item';
 
 // Modules:
 
@@ -14,10 +16,18 @@ import './ItemThumbnail.css';
 
 // Item thumbnail component
 const ItemThumbnail = ({ item }) => {
+  // Instantiate dispatch handler
+  const dispatch = useDispatch();
+
   return (
     <>
       <Card className='my-3 p-3 rounded'>
-        <Link to={`/item/${item._id}`}>
+        <Link
+          to={`/item/${item._id}`}
+          onClick={(event) => {
+            dispatch(populate(item));
+          }}
+        >
           <Card.Img src={item.image} variant='top' />
         </Link>
         <Card.Body>

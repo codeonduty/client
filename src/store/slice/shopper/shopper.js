@@ -20,6 +20,12 @@ const initialState = {
 const shopperSlice = createSlice({
   name: 'shopper',
   initialState,
+  reducers: {
+    setShopper: (state, action) => {
+      state.details = action.payload;
+    },
+  },
+
   extraReducers: {
     [login.pending]: (state, action) => {
       state.loading = true;
@@ -82,6 +88,8 @@ const shopperSlice = createSlice({
     },
   },
 });
+
+export const { setShopper } = shopperSlice.actions;
 
 export default shopperSlice.reducer;
 

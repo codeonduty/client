@@ -12,11 +12,13 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // Modules:
 
 import Message from '../../component/Message/Message';
+import { addItem as addToShoppingList } from '../../store/slice/list/shopping/shoppingList';
 
 // Code:
 
@@ -25,6 +27,12 @@ const Item = () => {
   const { error, details } = useSelector((store) => {
     return store.item;
   });
+
+  // Instantiate dispatch handler
+  const dispatch = useDispatch();
+
+  // Instantiate navigation handler
+  const navigate = useNavigate();
 
   return (
     <>
@@ -52,7 +60,18 @@ const Item = () => {
                   variant='primary'
                   type='button'
                   disabled={details.stock === 0}
-                  onClick={() => {}}
+                  onClick={(event) => {
+                    event.preventDefault();
+
+                    const shoppingListItem = {
+                      details,
+                      quantity: 1,
+                    };
+
+                    dispatch(addToShoppingList(shoppingListItem));
+
+                    navigate('/shopper/list/shopping', { replace: true });
+                  }}
                 >
                   ADD TO LIST
                 </Button>

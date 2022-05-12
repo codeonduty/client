@@ -21,7 +21,7 @@ const NavBar = () => {
   });
 
   return (
-    <Navbar bg='light' variant='light' expand='lg' sticky='top'>
+    <Navbar bg='light' variant='light' expand='lg' fixed='top'>
       <Container>
         <LinkContainer to='/item/catalogue'>
           <Navbar.Brand>Grocery Shopping List</Navbar.Brand>
@@ -47,6 +47,9 @@ const NavBar = () => {
                   <Nav.Link className='mx-3'>
                     <Wish />
                   </Nav.Link>
+                </LinkContainer>
+                <LinkContainer to='/item/catalogue'>
+                  <Nav.Link className='mx-3'>LOGOUT</Nav.Link>
                 </LinkContainer>
               </>
             )}
