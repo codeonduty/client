@@ -11,6 +11,7 @@ import { Row, Col } from 'react-bootstrap';
 // Components
 import ItemThumbail from '../../component/Thumbnail/Item/ItemThumbnail';
 import Message from '../../component/Message/Message';
+//import populate from '../../store/slice/catalogue/populate';
 
 // Code:
 
@@ -20,6 +21,15 @@ const Catalogue = () => {
   const { loading, error, items } = useSelector((store) => {
     return store.catalogue;
   });
+
+  /*
+  // Instantiate dispatch handler
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(populate());
+  });
+  */
 
   return (
     <>

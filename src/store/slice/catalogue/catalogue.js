@@ -7,6 +7,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // Modules:
 
 import items from './../../../items';
+//import populate from './populate';
 
 // Code:
 
@@ -19,6 +20,22 @@ const initialState = {
 const catalogueSlice = createSlice({
   name: 'catalogue',
   initialState,
+
+  /*
+  extraReducers: {
+    [populate.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [populate.fulfilled]: (state, action) => {
+      state.loading = false;
+
+      state.items = action.payload;
+    },
+    [populate.rejected]: (state, action) => {
+      state.loading = false;
+    },
+  },
+  */
 });
 
 export default catalogueSlice.reducer;

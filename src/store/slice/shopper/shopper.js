@@ -24,6 +24,12 @@ const shopperSlice = createSlice({
     setShopper: (state, action) => {
       state.details = action.payload;
     },
+
+    logout: (state, action) => {
+      localStorage.clear();
+      state.user = initialState;
+      window.location.reload(false);
+    },
   },
 
   extraReducers: {
@@ -89,7 +95,7 @@ const shopperSlice = createSlice({
   },
 });
 
-export const { setShopper } = shopperSlice.actions;
+export const { setShopper, logout } = shopperSlice.actions;
 
 export default shopperSlice.reducer;
 

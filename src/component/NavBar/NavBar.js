@@ -4,18 +4,22 @@
 
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 
 // Modules:
 
 import Bag from './../Icon/Bag/Bag';
 import Wish from './../Icon/Wish/Wish';
+import { logout } from '../../store/slice/shopper/shopper';
 
 // Code:
 
 // Navigation bar component
 const NavBar = () => {
+  // Instantiate dispatch handler
+  let dispatch = useDispatch();
+
   const { details } = useSelector((store) => {
     return store.shopper;
   });
@@ -49,7 +53,14 @@ const NavBar = () => {
                   </Nav.Link>
                 </LinkContainer>
                 <LinkContainer to='/item/catalogue'>
-                  <Nav.Link className='mx-3'>LOGOUT</Nav.Link>
+                  <Nav.Link
+                    className='mx-3'
+                    onClick={() => {
+                      dispatch(logout());
+                    }}
+                  >
+                    LOGOUT
+                  </Nav.Link>
                 </LinkContainer>
               </>
             )}
